@@ -1,0 +1,149 @@
+﻿<Window x:Class="WpfApplication1.StudenteManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="StudenteManager" Height="419" Width="543" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <TabControl TabStripPlacement="Left" SelectionChanged="TabControl_SelectionChanged" Margin="0,0,0,0">
+        <TabControl.Resources>
+            <Style TargetType="{x:Type TabItem}">
+                <Setter Property="HeaderTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <ContentPresenter Content="{TemplateBinding Content}">
+                                <ContentPresenter.LayoutTransform>
+                                    <RotateTransform Angle="270" />
+                                </ContentPresenter.LayoutTransform>
+                            </ContentPresenter>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Padding" Value="3" />
+                <Setter Property="Width" Value="20" />
+                <Setter Property="Height" Value="70" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
+            <Style TargetType="Paragraph">
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Foreground" Value="Chocolate"/>
+                <Setter Property="FontStyle" Value="Italic" />
+                <Setter Property="TextAlignment" Value="Left"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+        </TabControl.Resources>
+        <TabControl.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.9,0">
+                <GradientStop Color="#FFD2B3EC" Offset="0"/>
+                <GradientStop Color="#FF68A462" Offset="1"/>
+            </LinearGradientBrush>
+        </TabControl.Background>
+        <!--HOME PAGE-->
+        <TabItem Header="Home">
+            <StackPanel>
+                <FlowDocumentScrollViewer Margin="0">
+                    <FlowDocument Name="UserInfo">
+                        <Paragraph FontSize="30" Foreground="Brown">User Info</Paragraph>
+                        <Paragraph>Here you can find the corrent user info!</Paragraph>
+                        <Paragraph Foreground="DarkGoldenrod">Nome:</Paragraph>
+                        <Paragraph TextIndent="30" Foreground="Black">
+                            <TextBlock Text="{Binding Nome}" />
+                            <TextBlock Text="{Binding Cognome}" />
+                        </Paragraph>
+                        <Paragraph Foreground="DarkGoldenrod">Data di Nascita:</Paragraph>
+                        <Paragraph TextIndent="30" Foreground="Black">
+                            <TextBlock Text="{Binding data_di_nascita}" />
+                        </Paragraph>
+                        <Paragraph Foreground="DarkGoldenrod">Data di Iscrizione:</Paragraph>
+                        <Paragraph TextIndent="30" Foreground="Black">
+                            <TextBlock Text="{Binding data_di_iscrizione}" />
+                        </Paragraph>
+                        <Paragraph Foreground="DarkGoldenrod">Classe:</Paragraph>
+                        <Paragraph TextIndent="30" Foreground="Black">
+                            <TextBlock Text="{Binding classe}" />
+                        </Paragraph>
+                        <Paragraph Foreground="DarkGoldenrod">Sezione:</Paragraph>
+                        <Paragraph TextIndent="30" Foreground="Black">
+                            <TextBlock Text="{Binding sezione}" />
+                        </Paragraph>
+                    </FlowDocument>
+                </FlowDocumentScrollViewer>
+            </StackPanel>
+        </TabItem>
+        <!--ORARI PAGE-->
+        <TabItem Header="Orari">
+            <FlowDocument>
+                <Paragraph FontSize="30">Orario</Paragraph>
+                <Paragraph FontStyle="Italic" TextAlignment="Left" FontSize="14" Foreground="Chocolate">Orario settimanale scolastico</Paragraph>
+                <BlockUIContainer>
+                    <ListView Name="Orari" ItemsSource="{Binding Orari}" Width="auto">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Giorno" DisplayMemberBinding="{Binding Giorno}"/>
+                                <GridViewColumn Header="Prima Ora" DisplayMemberBinding="{Binding PrimaOra}"/>
+                                <GridViewColumn Header="Seconda Ora" DisplayMemberBinding="{Binding SecondaOra}"/>
+                                <GridViewColumn Header="Terza Ora" DisplayMemberBinding="{Binding TerzaOra}"/>
+                                <GridViewColumn Header="Quarta Ora" DisplayMemberBinding="{Binding QuartaOra}"/>
+                                <GridViewColumn Header="Quinta Ora" DisplayMemberBinding="{Binding QuintaOra}"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </BlockUIContainer>
+            </FlowDocument>
+        </TabItem>
+        <!--VOTI PAGE-->
+        <TabItem Header="Voti" >
+            <FlowDocumentScrollViewer>
+                <FlowDocument>
+                    <Paragraph FontSize="30">Media dei Voti per Materia</Paragraph>
+                    <Paragraph FontStyle="Italic" TextAlignment="Left" FontSize="14" Foreground="Chocolate">Media dei voti in base alle rispettive materie</Paragraph>
+                    <BlockUIContainer>
+                        <ListView Name="VotiMedi" ItemsSource="{Binding VotiMedi}" Width="auto">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Materia" Width="150"  DisplayMemberBinding="{Binding Materia}"/>
+                                    <GridViewColumn Header="Voto" Width="100" DisplayMemberBinding="{Binding Voto}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </BlockUIContainer>
+                    <Paragraph FontSize="30">Voti Complessivi</Paragraph>
+                    <Paragraph FontStyle="Italic" TextAlignment="Left" FontSize="14" Foreground="Chocolate">Voto in ordine di insereminto</Paragraph>
+                    <BlockUIContainer>
+                        <ListView Name="VotiComplessivi" ItemsSource="{Binding VotiComplessivi}" Width="auto">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="Materia" Width="150" DisplayMemberBinding="{Binding Materia}"/>
+                                    <GridViewColumn Header="Voto" Width="100" DisplayMemberBinding="{Binding Voto}"/>
+                                    <GridViewColumn Header="Data Inserimento" Width="150" DisplayMemberBinding="{Binding Data}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </BlockUIContainer>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+        </TabItem>
+        <!--DOCUMENTS PAGE-->
+        <TabItem Header="Documents">
+            <StackPanel>
+                <FlowDocumentScrollViewer Height="183">
+                    <FlowDocument>
+                        <Paragraph FontSize="30">Users</Paragraph>
+                        <Paragraph FontStyle="Italic" TextAlignment="Left" FontSize="14" Foreground="Chocolate">Here's a list of our users, inside our FlowDocument, in a completely interactive ListView control!</Paragraph>
+                        <BlockUIContainer>
+                            <ListView Name="Docs" BorderThickness="0" ItemsSource="{Binding Docs}">
+                                <ListView.View>
+                                    <GridView>
+                                        <GridViewColumn Header="Nome" DisplayMemberBinding="{Binding Nome}" Width="100" />
+                                        <GridViewColumn Header="Materia" DisplayMemberBinding="{Binding Materia}" Width="100" />
+                                        <GridViewColumn Header="Autore" DisplayMemberBinding="{Binding autore}" Width="100" />
+                                        <GridViewColumn Header="Caricato il" DisplayMemberBinding="{Binding DataCarico}" Width="100" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </BlockUIContainer>
+                    </FlowDocument>
+                </FlowDocumentScrollViewer>
+                <DocumentViewer Margin="0,0,0,0" Height="200"/>
+            </StackPanel>
+        </TabItem>
+    </TabControl>
+</Window>
