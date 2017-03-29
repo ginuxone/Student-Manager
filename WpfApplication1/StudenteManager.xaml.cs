@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Windows.Media.Animation;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using Core;
 
 namespace WpfApplication1
 {
@@ -31,7 +21,7 @@ namespace WpfApplication1
             s = new Studente();
             InitializeComponent();
         }
-        private void loadDatiStudente()
+        private void LoadDatiStudente()
         {
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["SchoolConnectionString"].ToString());
             SqlDataReader dr;
@@ -48,10 +38,10 @@ namespace WpfApplication1
                         {
                             s.Nome=dr.GetString(1);
                             s.Cognome = dr.GetString(2);
-                            s.data_di_nascita = dr.GetDateTime(3);
-                            s.data_di_iscrizione = dr.GetDateTime(4);
-                            s.classe = dr.GetInt32(5);
-                            s.sezione = dr.GetString(6);
+                            s.Data_di_nascita = dr.GetDateTime(3);
+                            s.Data_di_iscrizione = dr.GetDateTime(4);
+                            s.Classe = dr.GetInt32(5);
+                            s.Sezione = dr.GetString(6);
                         }
                         UserInfo.DataContext = s;
                     }
@@ -67,7 +57,7 @@ namespace WpfApplication1
                 sc.Close();
             }
         }
-        private void loadOrari()
+        private void LoadOrari()
         {
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["SchoolConnectionString"].ToString());
             SqlDataAdapter da = new SqlDataAdapter();
@@ -82,7 +72,7 @@ namespace WpfApplication1
             }
             sc.Close();
         }
-        private void loadDocs()
+        private void LoadDocs()
         {
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["SchoolConnectionString"].ToString());
             SqlDataAdapter da = new SqlDataAdapter();
@@ -97,7 +87,7 @@ namespace WpfApplication1
             }
             sc.Close();
         }
-        private void loadVoti()
+        private void LoadVoti()
         {
             SqlConnection sc = new SqlConnection(ConfigurationManager.ConnectionStrings["SchoolConnectionString"].ToString());
             SqlDataAdapter da = new SqlDataAdapter();
@@ -128,16 +118,16 @@ namespace WpfApplication1
             switch (tmp.Header.ToString())
             {
                 case "Home":
-                    loadDatiStudente();
+                    LoadDatiStudente();
                     break;
                 case "Orari":
-                    loadOrari();
+                    LoadOrari();
                     break;
                 case "Voti":
-                    loadVoti();
+                    LoadVoti();
                     break;
                 case "Documents":
-                    loadDocs();
+                    LoadDocs();
                     break;
             }
         } 
